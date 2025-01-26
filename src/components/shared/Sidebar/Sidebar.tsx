@@ -1,11 +1,25 @@
 import logo from '../../../assets/logo-white.png';
 import patternBg from '../../../assets/pattern_h.png';
+import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
+import SellOutlinedIcon from '@mui/icons-material/SellOutlined';
+import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
+import HistoryEduOutlinedIcon from '@mui/icons-material/HistoryEduOutlined';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
+import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import { getCurrentDate } from '../../../utils/date-constants';
+import { useNavigate } from 'react-router-dom';
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+  const currentDate = getCurrentDate();
+
   return (
     <div
       className="bg-[#15283c]
-        h-screen w-1/5 sticky flex flex-col shadow-lg z-50"
+        h-screen w-1/5 sticky flex flex-col shadow-lg z-50 relative"
       style={{
         backgroundImage: `url(${patternBg})`,
         backgroundBlendMode: 'overlay',
@@ -20,7 +34,81 @@ export default function Sidebar() {
           </span>
         </div>
       </div>
-      <div className="p-4">Menu items</div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin')}
+      >
+        <SpeedOutlinedIcon className="mr-2 text-amber-600" />
+        <span className="mr-1 text-gold-600">Dashboard</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin/orders')}
+      >
+        <EuroOutlinedIcon className="mr-2 text-emerald-600" />
+        <span className="mr-1">Orders</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin/products')}
+      >
+        <SellOutlinedIcon className="mr-2 text-indigo-600" />
+        <span className="mr-1">Products</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin/books')}
+      >
+        <AutoStoriesOutlinedIcon className="mr-2 text-rose-600" />
+        <span className="mr-1">Books</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin/articles')}
+      >
+        <HistoryEduOutlinedIcon className="mr-2 text-yellow-600" />
+        <span className="mr-1">Articles</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin/pages')}
+      >
+        <LibraryBooksOutlinedIcon className="mr-2 text-sky-600" />
+        <span className="mr-1">Pages</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin/users')}
+      >
+        <PeopleOutlineOutlinedIcon className="mr-2 text-pink-600" />
+        <span className="mr-1">Users</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div
+        className="p-4 flex items-center w-full bg-transparent text-white 
+        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
+        onClick={() => navigate('/admin/settings')}
+      >
+        <SettingsOutlinedIcon className="mr-2 text-orange-600" />
+        <span className="mr-1">Settings</span>
+        <ExpandMoreOutlinedIcon />
+      </div>
+      <div className="absolute bottom-0 left-0 flex items-center p-4 text-white text-xs text-center font-semibold">
+        &copy; {currentDate.year} Ghost Tribes CMS.
+      </div>
     </div>
   );
 }
