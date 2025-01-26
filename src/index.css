@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+:root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Nunito', 'Segoe UI', 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgba(0, 0, 0, 0.03);
+}
