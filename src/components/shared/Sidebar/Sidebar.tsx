@@ -12,14 +12,19 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { getCurrentDate } from '../../../utils/date-constants';
 import { useNavigate } from 'react-router-dom';
 
-export default function Sidebar() {
+interface ISidebar {
+  open: boolean;
+}
+
+export default function Sidebar({ open }: ISidebar) {
   const navigate = useNavigate();
   const currentDate = getCurrentDate();
 
   return (
     <div
-      className="bg-[#15283c]
-        h-screen w-1/5 sticky flex flex-col shadow-lg z-50 relative"
+      className={`bg-[#15283c]
+        h-screen sticky flex flex-col shadow-lg z-50 relative 
+        ${open ? 'w-1/5' : 'w-[60px]'}`}
       style={{
         backgroundImage: `url(${patternBg})`,
         backgroundBlendMode: 'overlay',
@@ -27,12 +32,16 @@ export default function Sidebar() {
     >
       <div className="w-full h-16 bg-[#214162] flex items-center p-4">
         <img src={logo} alt="logo" className="w-8" />
-        <div className="hidden md:flex items-end ml-2">
-          <span className="text-white text-xl font-semibold">Ghost Tribes</span>
-          <span className="text-white font-bold text-xs bg-pink-600 p-1 rounded-full ml-1">
-            cms
-          </span>
-        </div>
+        {open && (
+          <div className="hidden md:flex items-end ml-2">
+            <span className="text-white text-xl font-semibold">
+              Ghost Tribes
+            </span>
+            <span className="text-white font-bold text-xs bg-pink-600 p-1 rounded-full ml-1">
+              cms
+            </span>
+          </div>
+        )}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -40,8 +49,7 @@ export default function Sidebar() {
         onClick={() => navigate('/admin')}
       >
         <SpeedOutlinedIcon className="mr-2 text-amber-600" />
-        <span className="mr-1 text-gold-600">Dashboard</span>
-        <ExpandMoreOutlinedIcon />
+        {open && <span className="mr-1 text-gold-600">Dashboard</span>}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -49,8 +57,12 @@ export default function Sidebar() {
         onClick={() => navigate('/admin/orders')}
       >
         <EuroOutlinedIcon className="mr-2 text-emerald-600" />
-        <span className="mr-1">Orders</span>
-        <ExpandMoreOutlinedIcon />
+        {open && (
+          <>
+            <span className="mr-1">Orders</span>
+            <ExpandMoreOutlinedIcon />
+          </>
+        )}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -58,8 +70,12 @@ export default function Sidebar() {
         onClick={() => navigate('/admin/products')}
       >
         <SellOutlinedIcon className="mr-2 text-indigo-600" />
-        <span className="mr-1">Products</span>
-        <ExpandMoreOutlinedIcon />
+        {open && (
+          <>
+            <span className="mr-1">Products</span>
+            <ExpandMoreOutlinedIcon />
+          </>
+        )}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -67,8 +83,12 @@ export default function Sidebar() {
         onClick={() => navigate('/admin/books')}
       >
         <AutoStoriesOutlinedIcon className="mr-2 text-rose-600" />
-        <span className="mr-1">Books</span>
-        <ExpandMoreOutlinedIcon />
+        {open && (
+          <>
+            <span className="mr-1">Books</span>
+            <ExpandMoreOutlinedIcon />
+          </>
+        )}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -76,8 +96,12 @@ export default function Sidebar() {
         onClick={() => navigate('/admin/articles')}
       >
         <HistoryEduOutlinedIcon className="mr-2 text-yellow-600" />
-        <span className="mr-1">Articles</span>
-        <ExpandMoreOutlinedIcon />
+        {open && (
+          <>
+            <span className="mr-1">Articles</span>
+            <ExpandMoreOutlinedIcon />
+          </>
+        )}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -85,8 +109,12 @@ export default function Sidebar() {
         onClick={() => navigate('/admin/pages')}
       >
         <LibraryBooksOutlinedIcon className="mr-2 text-sky-600" />
-        <span className="mr-1">Pages</span>
-        <ExpandMoreOutlinedIcon />
+        {open && (
+          <>
+            <span className="mr-1">Pages</span>
+            <ExpandMoreOutlinedIcon />
+          </>
+        )}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -94,8 +122,12 @@ export default function Sidebar() {
         onClick={() => navigate('/admin/users')}
       >
         <PeopleOutlineOutlinedIcon className="mr-2 text-pink-600" />
-        <span className="mr-1">Users</span>
-        <ExpandMoreOutlinedIcon />
+        {open && (
+          <>
+            <span className="mr-1">Users</span>
+            <ExpandMoreOutlinedIcon />
+          </>
+        )}
       </div>
       <div
         className="p-4 flex items-center w-full bg-transparent text-white 
@@ -103,12 +135,13 @@ export default function Sidebar() {
         onClick={() => navigate('/admin/settings')}
       >
         <SettingsOutlinedIcon className="mr-2 text-orange-600" />
-        <span className="mr-1">Settings</span>
-        <ExpandMoreOutlinedIcon />
+        {open && <span className="mr-1">Settings</span>}
       </div>
-      <div className="absolute bottom-0 left-0 flex items-center p-4 text-white text-xs text-center font-semibold">
-        &copy; {currentDate.year} Ghost Tribes CMS.
-      </div>
+      {open && (
+        <div className="absolute bottom-0 left-0 flex items-center p-4 text-white text-xs text-center font-semibold">
+          &copy; {currentDate.year} Ghost Tribes CMS.
+        </div>
+      )}
     </div>
   );
 }

@@ -12,7 +12,10 @@ import {
 } from '../../../constants/data';
 import { useState } from 'react';
 
-export default function Header() {
+interface IHeader {
+  closeSidebar: () => void;
+}
+export default function Header({ closeSidebar }: IHeader) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const handleIconClick = (dropdownId: string) => {
@@ -25,6 +28,7 @@ export default function Header() {
         className="flex items-center w-16 h-16 bg-pink-600 items-center 
             justify-center text-white cursor-pointer hover:bg-pink-800 
             transition duration-300 ease-in-out"
+        onClick={closeSidebar}
       >
         <MenuOutlinedIcon />
       </div>
