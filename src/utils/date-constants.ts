@@ -13,5 +13,5 @@ export function getCurrentDate() {
 }
 
 export function formatDate(date: Date): string {
-    return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate;
+    return date.getFullYear() + '-' + date.getMonth()
 }

@@ -4,8 +4,21 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
+import DropdownNotification from '../DropdownNotification/DropdownNotification';
+import {
+  invoicesNotifications,
+  messageNotification,
+  ordersNotifications,
+} from '../../../constants/data';
+import { useState } from 'react';
 
 export default function Header() {
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const handleIconClick = (dropdownId: string) => {
+    setOpenDropdown(openDropdown === dropdownId ? null : dropdownId);
+  };
+
   return (
     <div className="w-full bg-[#15283c] h-16 flex justify-between items-center">
       <div
@@ -21,37 +34,55 @@ export default function Header() {
             <EuroOutlinedIcon
               className="text-white hover:text-gray-200 transition 
                   duration-300 ease-in-out cursor-pointer"
+              onClick={() => handleIconClick('orders')}
             />
-            <span
-              className="absolute top-3 left-3 bg-pink-600 rounded-full 
-                  px-1 text-white text-center text-xs"
-            >
-              3
-            </span>
+            {invoicesNotifications.length > 0 && (
+              <span
+                className="absolute top-3 left-3 bg-pink-600 rounded-full 
+                    px-1 text-white text-center text-xs"
+              >
+                {invoicesNotifications.length}
+              </span>
+            )}
+            {openDropdown === 'orders' && (
+              <DropdownNotification notifications={invoicesNotifications} />
+            )}
           </div>
           <div className="relative flex items-center mr-4 h-full">
             <NotificationsOutlinedIcon
               className="text-white hover:text-gray-200 transition 
                   duration-300 ease-in-out cursor-pointer"
+              onClick={() => handleIconClick('notifications')}
             />
-            <span
-              className="absolute top-3 left-3 bg-pink-600 rounded-full 
-                  px-1 text-white text-center text-xs"
-            >
-              7
-            </span>
+            {ordersNotifications.length > 0 && (
+              <span
+                className="absolute top-3 left-3 bg-pink-600 rounded-full 
+                    px-1 text-white text-center text-xs"
+              >
+                {ordersNotifications.length}
+              </span>
+            )}
+            {openDropdown === 'notifications' && (
+              <DropdownNotification notifications={ordersNotifications} />
+            )}
           </div>
           <div className="relative flex items-center mr-4 h-full">
             <MailOutlinedIcon
               className="text-white hover:text-gray-200 transition 
                   duration-300 ease-in-out cursor-pointer"
+              onClick={() => handleIconClick('messages')}
             />
-            <span
-              className="absolute top-3 left-3 bg-pink-600 rounded-full 
-                  px-1 text-white text-center text-xs"
-            >
-              2
-            </span>
+            {messageNotification.length > 0 && (
+              <span
+                className="absolute top-3 left-3 bg-pink-600 rounded-full 
+                    px-1 text-white text-center text-xs"
+              >
+                {messageNotification.length}
+              </span>
+            )}
+            {openDropdown === 'messages' && (
+              <DropdownNotification notifications={messageNotification} />
+            )}
           </div>
         </div>
         <div className="flex items-center justify-center bg-pink-600 h-full px-4">
