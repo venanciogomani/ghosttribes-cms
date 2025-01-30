@@ -1,7 +1,6 @@
 import logo from '../../../assets/logo-white.png';
 import patternBg from '../../../assets/pattern_h.png';
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import SellOutlinedIcon from '@mui/icons-material/SellOutlined';
 import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
@@ -11,6 +10,8 @@ import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { getCurrentDate } from '../../../utils/date-constants';
 import { useNavigate } from 'react-router-dom';
+import MenuItem from './MenuItem';
+import { ISubMenuItem } from './SubMenuItem';
 
 interface ISidebar {
   open: boolean;
@@ -19,6 +20,21 @@ interface ISidebar {
 export default function Sidebar({ open }: ISidebar) {
   const navigate = useNavigate();
   const currentDate = getCurrentDate();
+
+  const productsSubmenu: ISubMenuItem[] = [
+    {
+      label: 'Products',
+      url: '/admin/products?type=products',
+    },
+    {
+      label: 'Categories',
+      url: '/admin/products?type=categories',
+    },
+    {
+      label: 'Tags',
+      url: '/admin/products?type=tags',
+    },
+  ];
 
   return (
     <div
@@ -43,100 +59,64 @@ export default function Sidebar({ open }: ISidebar) {
           </div>
         )}
       </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin')}
-      >
-        <SpeedOutlinedIcon className="mr-2 text-amber-600" />
-        {open && <span className="mr-1 text-gold-600">Dashboard</span>}
-      </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin/orders')}
-      >
-        <EuroOutlinedIcon className="mr-2 text-emerald-600" />
-        {open && (
-          <>
-            <span className="mr-1">Orders</span>
-            <ExpandMoreOutlinedIcon />
-          </>
-        )}
-      </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin/products')}
-      >
-        <SellOutlinedIcon className="mr-2 text-indigo-600" />
-        {open && (
-          <>
-            <span className="mr-1">Products</span>
-            <ExpandMoreOutlinedIcon />
-          </>
-        )}
-      </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin/books')}
-      >
-        <AutoStoriesOutlinedIcon className="mr-2 text-rose-600" />
-        {open && (
-          <>
-            <span className="mr-1">Books</span>
-            <ExpandMoreOutlinedIcon />
-          </>
-        )}
-      </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin/articles')}
-      >
-        <HistoryEduOutlinedIcon className="mr-2 text-yellow-600" />
-        {open && (
-          <>
-            <span className="mr-1">Articles</span>
-            <ExpandMoreOutlinedIcon />
-          </>
-        )}
-      </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin/pages')}
-      >
-        <LibraryBooksOutlinedIcon className="mr-2 text-sky-600" />
-        {open && (
-          <>
-            <span className="mr-1">Pages</span>
-            <ExpandMoreOutlinedIcon />
-          </>
-        )}
-      </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin/users')}
-      >
-        <PeopleOutlineOutlinedIcon className="mr-2 text-pink-600" />
-        {open && (
-          <>
-            <span className="mr-1">Users</span>
-            <ExpandMoreOutlinedIcon />
-          </>
-        )}
-      </div>
-      <div
-        className="p-4 flex items-center w-full bg-transparent text-white 
-        cursor-pointer hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out"
-        onClick={() => navigate('/admin/settings')}
-      >
-        <SettingsOutlinedIcon className="mr-2 text-orange-600" />
-        {open && <span className="mr-1">Settings</span>}
-      </div>
+      <MenuItem
+        label="Dashboard"
+        open={open}
+        clickAction={() => navigate('/admin')}
+        icon={<SpeedOutlinedIcon className="mr-2 text-amber-600" />}
+        hasSubmenu={false}
+      />
+      <MenuItem
+        label="Orders"
+        open={open}
+        clickAction={() => navigate('/admin/orders')}
+        icon={<EuroOutlinedIcon className="mr-2 text-emerald-600" />}
+        hasSubmenu={true}
+        submenu={[]}
+      />
+      <MenuItem
+        label="Products"
+        open={open}
+        clickAction={() => navigate('/admin/products')}
+        icon={<SellOutlinedIcon className="mr-2 text-indigo-600" />}
+        hasSubmenu={true}
+        submenu={productsSubmenu}
+      />
+      <MenuItem
+        label="Books"
+        open={open}
+        clickAction={() => navigate('/admin/books')}
+        icon={<AutoStoriesOutlinedIcon className="mr-2 text-rose-600" />}
+        hasSubmenu={true}
+      />
+      <MenuItem
+        label="Articles"
+        open={open}
+        clickAction={() => navigate('/admin/articles')}
+        icon={<HistoryEduOutlinedIcon className="mr-2 text-yellow-600" />}
+        hasSubmenu={true}
+      />
+      <MenuItem
+        label="Pages"
+        open={open}
+        clickAction={() => navigate('/admin/pages')}
+        icon={<LibraryBooksOutlinedIcon className="mr-2 text-sky-600" />}
+        hasSubmenu={true}
+      />
+      <MenuItem
+        label="Users"
+        open={open}
+        clickAction={() => navigate('/admin/users')}
+        icon={<PeopleOutlineOutlinedIcon className="mr-2 text-pink-600" />}
+        hasSubmenu={true}
+      />
+      <MenuItem
+        label="Settings"
+        open={open}
+        clickAction={() => navigate('/admin/settings')}
+        icon={<SettingsOutlinedIcon className="mr-2 text-orange-600" />}
+        hasSubmenu={false}
+      />
       {open && (
         <div className="absolute bottom-0 left-0 flex items-center p-4 text-white text-xs text-center font-semibold">
           &copy; {currentDate.year} Ghost Tribes CMS.
