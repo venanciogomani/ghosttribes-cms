@@ -29,8 +29,10 @@ export default function ProductsOverview() {
       setTableData(productsData);
     } else if (tab === 'categories') {
       setTableData(categoriesData);
+      setShow(false);
     } else if (tab === 'tags') {
       setTableData(tagsData);
+      setShow(false);
     }
   };
 
@@ -88,15 +90,17 @@ export default function ProductsOverview() {
               </div>
               <div className="p-2 grow border-b border-slate-300">&nbsp;</div>
             </div>
-            <div className="relative p-4">
-              <TuneOutlinedIcon
-                className="text-sky-600 cursor-pointer"
-                onClick={() => setShow(true)}
-              />
-              <span className="absolute top-2 right-2 bg-pink-600 px-1 rounded-full text-white text-xs">
-                2
-              </span>
-            </div>
+            {selectedTab === 'products' && (
+              <div className="relative p-4">
+                <TuneOutlinedIcon
+                  className="text-sky-600 cursor-pointer"
+                  onClick={() => setShow(true)}
+                />
+                <span className="absolute top-2 right-2 bg-pink-600 px-1 rounded-full text-white text-xs">
+                  2
+                </span>
+              </div>
+            )}
           </div>
           <DataTable columns={tableData.columns} rows={tableData.rows} />
         </div>
