@@ -23,7 +23,7 @@ export default function Header({ closeSidebar }: IHeader) {
   };
 
   return (
-    <div className="w-full bg-[#15283c] h-16 flex justify-between items-center">
+    <div className="w-full bg-[#15283c] h-16 flex justify-between items-center z-50">
       <div
         className="flex items-center w-16 h-16 bg-pink-600 items-center 
             justify-center text-white cursor-pointer hover:bg-pink-800 

@@ -5,8 +5,10 @@ import { categories, products, tags } from '../../../constants/data';
 import { createProductsDataTable } from './controllers/ProductsController';
 import { createCategoriesDataTable } from './controllers/CategoriesController';
 import { createTagsDataTable } from './controllers/TagsController';
+import FilterDrawer from '../../shared/FilterDrawer/FilterDrawer';
 
 export default function ProductsOverview() {
+  const [show, setShow] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<string>('products');
   const [tableData, setTableData] = useState<IDataItem>({} as IDataItem);
 
@@ -33,7 +35,7 @@ export default function ProductsOverview() {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="relative flex flex-col h-full p-4">
       <h1 className="text-2xl text-bold text-slate-800">Products Overview</h1>
       <div className="mt-4 bg-white rounded-lg w-full h-full shadow-lg">
         <div className="p-4 flex flex-col overflow-hidden">
@@ -87,7 +89,10 @@ export default function ProductsOverview() {
               <div className="p-2 grow border-b border-slate-300">&nbsp;</div>
             </div>
             <div className="relative p-4">
-              <TuneOutlinedIcon className="text-sky-600 cursor-pointer" />
+              <TuneOutlinedIcon
+                className="text-sky-600 cursor-pointer"
+                onClick={() => setShow(true)}
+              />
               <span className="absolute top-2 right-2 bg-pink-600 px-1 rounded-full text-white text-xs">
                 2
               </span>
@@ -96,6 +101,7 @@ export default function ProductsOverview() {
           <DataTable columns={tableData.columns} rows={tableData.rows} />
         </div>
       </div>
+      <FilterDrawer show={show} setShow={setShow} />
     </div>
   );
 }

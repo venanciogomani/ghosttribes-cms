@@ -13,7 +13,7 @@ export default function Dashboard() {
         className={`flex flex-col ${isSidebarOpen ? 'w-4/5' : 'w-[calc(100%_-_60px)]'}`}
       >
         <Header closeSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-        <div className="p-4 h-full">
+        <div className=" h-full">
           <ProductsOverview />
         </div>
       </div>
