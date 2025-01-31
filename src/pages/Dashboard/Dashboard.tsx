@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import ProductsOverview from '../../components/concepts/products/ProductsOverview';
 import Header from '../../components/shared/Header/Header';
 import Sidebar from '../../components/shared/Sidebar/Sidebar';
+import { Outlet } from 'react-router-dom';
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
@@ -14,7 +14,7 @@ export default function Dashboard() {
       >
         <Header closeSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
         <div className=" h-full">
-          <ProductsOverview />
+          <Outlet />
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ export default function Sidebar({ open }: ISidebar) {
   const productsSubmenu: ISubMenuItem[] = [
     {
       label: 'Products',
-      url: '/admin/products?type=products',
+      url: '/admin/products',
     },
     {
       label: 'Categories',
