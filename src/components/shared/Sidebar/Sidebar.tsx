@@ -27,6 +27,10 @@ export default function Sidebar({ open }: ISidebar) {
       url: '/admin/products',
     },
     {
+      label: 'Collections',
+      url: '/admin/products?type=collections',
+    },
+    {
       label: 'Categories',
       url: '/admin/products?type=categories',
     },

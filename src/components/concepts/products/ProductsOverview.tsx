@@ -35,12 +35,12 @@ export default function ProductsOverview() {
     setOpenCreate(false);
     if (tab === 'products') {
       setTableData(productsData);
+    } else if (tab === 'collections') {
+      setTableData(categoriesData);
     } else if (tab === 'categories') {
       setTableData(categoriesData);
-      setShow(false);
     } else if (tab === 'tags') {
       setTableData(tagsData);
-      setShow(false);
     }
   };
 
@@ -65,6 +65,21 @@ export default function ProductsOverview() {
                 }}
               >
                 <span className="cursor-pointer">Products</span>
+              </div>
+              <div
+                className={
+                  selectedTab === 'collections'
+                    ? `p-2 rounded-t-lg border-t border-l border-r border-slate-300`
+                    : `p-2 border-b border-slate-300 bg-tranparent rounded-t-lg
+                hover:bg-gray-100 transition duration-300 ease-in-out`
+                }
+                onClick={() => {
+                  if (selectedTab !== 'collections') {
+                    handleSelectTab('collections');
+                  }
+                }}
+              >
+                <span className="cursor-pointer">Collections</span>
               </div>
               <div
                 className={
@@ -114,6 +129,15 @@ export default function ProductsOverview() {
                       onClick={() => navigate('/admin/products/create')}
                     >
                       Product
+                    </div>
+                    <div
+                      className="w-full p-2 text-sm cursor-pointer bg-transparent 
+                      hover:bg-gray-100 transition duration-300 ease-in-out"
+                      onClick={() =>
+                        navigate('/admin/products/create?type=collection')
+                      }
+                    >
+                      Collection
                     </div>
                     <div
                       className="w-full p-2 text-sm cursor-pointer bg-transparent 

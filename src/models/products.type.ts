@@ -33,3 +33,7 @@ export interface ITag {
     id: number;
     name: string;
 }
+
+export interface ProductsListDto {
+    products: IProduct[];
+}
