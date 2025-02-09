@@ -11,11 +11,12 @@ import { useNavigate } from 'react-router-dom';
 import { useGetProducts } from '../../../hooks/use-products';
 
 export default function ProductsOverview() {
-  const { data: products } = useGetProducts();
+  const { data: products, isLoading: isProductsLoading } = useGetProducts();
   const [show, setShow] = useState<boolean>(false);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<string>('products');
   const [tableData, setTableData] = useState<IDataItem>({} as IDataItem);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   const productsData = useMemo(
@@ -33,23 +34,29 @@ export default function ProductsOverview() {
 
   useEffect(() => {
     setTableData(productsData);
+    setLoading(isProductsLoading);
     setSelectedTab('products');
     setShow(false);
     setOpenCreate(false);
   }, [products]);
 
   const handleSelectTab = (tab: string) => {
+    setLoading(true);
     setSelectedTab(tab);
     setShow(false);
     setOpenCreate(false);
     if (tab === 'products') {
       setTableData(productsData);
+      setLoading(isProductsLoading);
     } else if (tab === 'collections') {
       setTableData(categoriesData);
+      setLoading(false);
     } else if (tab === 'categories') {
       setTableData(categoriesData);
+      setLoading(false);
     } else if (tab === 'tags') {
       setTableData(tagsData);
+      setLoading(false);
     }
   };
 
@@ -182,7 +189,11 @@ export default function ProductsOverview() {
               )}
             </div>
           </div>
-          <DataTable columns={tableData.columns} rows={tableData.rows} />
+          {loading ? (
+            <div>Loading data...</div>
+          ) : (
+            <DataTable columns={tableData.columns} rows={tableData.rows} />
+          )}
         </div>
       </div>
       <FilterDrawer show={show} setShow={setShow} />
