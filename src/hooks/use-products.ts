@@ -16,7 +16,7 @@ export function useGetProducts(id?: number): IProductsListDto {
     const error = formatError(query.error as Error);
 
     return {
-        data: query.data?.products,
+        data: query.data,
         isLoading: query.isLoading,
         error
     }

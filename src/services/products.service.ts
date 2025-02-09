@@ -1,4 +1,4 @@
-import { ProductsListDto } from "../models/products.type";
+import { IProduct } from "../models/products.type";
 import { api } from "./api.service";
 
 export default function getProducts(id?: number) {
@@ -11,7 +11,7 @@ export default function getProducts(id?: number) {
         .fetchError((error) => {
             throw new FetchError("Failed to fetch product data", error);
         })
-        .json<ProductsListDto>();
+        .json<IProduct[]>();
 }
 
 class FetchError extends Error {

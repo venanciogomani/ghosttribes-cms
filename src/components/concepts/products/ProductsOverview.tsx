@@ -1,32 +1,41 @@
 import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DataTable, IDataItem } from '../../shared/DataTable/DataTable';
-import { categories, products, tags } from '../../../constants/data';
+import { categories, tags } from '../../../constants/data';
 import { createProductsDataTable } from './controllers/ProductsController';
 import { createCategoriesDataTable } from './controllers/CategoriesController';
 import { createTagsDataTable } from './controllers/TagsController';
 import FilterDrawer from '../../shared/FilterDrawer/FilterDrawer';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import { useNavigate } from 'react-router-dom';
+import { useGetProducts } from '../../../hooks/use-products';
 
 export default function ProductsOverview() {
+  const { data: products } = useGetProducts();
   const [show, setShow] = useState<boolean>(false);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<string>('products');
   const [tableData, setTableData] = useState<IDataItem>({} as IDataItem);
   const navigate = useNavigate();
 
-  const productsData = createProductsDataTable(products);
-  const categoriesData = createCategoriesDataTable(categories);
-  const tagsData = createTagsDataTable(tags);
+  const productsData = useMemo(
+    () => (products ? createProductsDataTable(products) : ({} as IDataItem)),
+    [products]
+  );
+  const categoriesData = useMemo(
+    () => createCategoriesDataTable(categories) ?? ({} as IDataItem),
+    [categories]
+  );
+  const tagsData = useMemo(
+    () => createTagsDataTable(tags) ?? ({} as IDataItem),
+    [tags]
+  );
 
   useEffect(() => {
-    if (Object.keys(productsData).length) {
-      setTableData(productsData);
-      setSelectedTab('products');
-      setShow(false);
-      setOpenCreate(false);
-    }
+    setTableData(productsData);
+    setSelectedTab('products');
+    setShow(false);
+    setOpenCreate(false);
   }, [products]);
 
   const handleSelectTab = (tab: string) => {

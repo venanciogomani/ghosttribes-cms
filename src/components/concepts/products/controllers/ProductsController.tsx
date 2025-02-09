@@ -3,7 +3,6 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IProduct } from '../../../../models/products.type';
 import { IDataItem } from '../../../shared/DataTable/DataTable';
-import { useNavigate } from 'react-router-dom';
 
 export function createProductsDataTable(products: IProduct[]): IDataItem {
   return {
@@ -17,8 +16,6 @@ function createProductColumns(): string[] {
 }
 
 function createProductRows(products: IProduct[]): JSX.Element[] {
-  const navigate = useNavigate();
-
   return products.map((product) => (
     <div className="grid grid-cols-6 p-2 text-gray-800 border-b border-gray-200">
       <div>{product.id}</div>
@@ -31,13 +28,13 @@ function createProductRows(products: IProduct[]): JSX.Element[] {
           fontSize="small"
           className="text-sky-600 mr-2 cursor-pointer hover:text-sky-800 
           transition duration-300 ease-in-out"
-          onClick={() => navigate('/admin/products/view/' + product.id)}
+          // onClick={() => navigate('/admin/products/view/' + product.id)}
         />
         <EditIcon
           fontSize="small"
           className="text-yellow-600 mr-2 cursor-pointer hover:text-yellow-800 
           transition duration-300 ease-in-out"
-          onClick={() => navigate('/admin/products/edit/' + product.id)}
+          // onClick={() => navigate('/admin/products/edit/' + product.id)}
         />
         <DeleteOutlineIcon
           fontSize="small"
