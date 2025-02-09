@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Auth from './pages/Auth/Auth';
 import ProductsOverview from './components/concepts/products/ProductsOverview';
-import CreateProduct from './components/concepts/products/CreateProduct';
+import CreateProduct from './components/concepts/products/CreateProduct/CreateProduct';
 import EditProduct from './components/concepts/products/EditProduct';
 import ViewProduct from './components/concepts/products/ViewProduct';
 import Overview from './components/concepts/overview/Overview';
