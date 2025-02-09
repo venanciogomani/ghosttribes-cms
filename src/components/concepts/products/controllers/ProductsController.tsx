@@ -1,8 +1,6 @@
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IProduct } from '../../../../models/products.type';
 import { IDataItem } from '../../../shared/DataTable/DataTable';
+import StatusActions from '../StatusActions';
 
 export function createProductsDataTable(products: IProduct[]): IDataItem {
   return {
@@ -23,25 +21,7 @@ function createProductRows(products: IProduct[]): JSX.Element[] {
       <div>{product.sku}</div>
       <div>{product.price}</div>
       <div>{product.salePrice}</div>
-      <div className="flex items-center p-2">
-        <VisibilityIcon
-          fontSize="small"
-          className="text-sky-600 mr-2 cursor-pointer hover:text-sky-800 
-          transition duration-300 ease-in-out"
-          // onClick={() => navigate('/admin/products/view/' + product.id)}
-        />
-        <EditIcon
-          fontSize="small"
-          className="text-yellow-600 mr-2 cursor-pointer hover:text-yellow-800 
-          transition duration-300 ease-in-out"
-          // onClick={() => navigate('/admin/products/edit/' + product.id)}
-        />
-        <DeleteOutlineIcon
-          fontSize="small"
-          className="text-rose-600 mr-2 cursor-pointer hover:text-rose-800 
-          transition duration-300 ease-in-out"
-        />
-      </div>
+      <StatusActions id={product.id} link="products" />
     </div>
   ));
 }
