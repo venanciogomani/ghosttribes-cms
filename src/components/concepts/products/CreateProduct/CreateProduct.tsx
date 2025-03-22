@@ -9,6 +9,8 @@ import AddCategory from './AddCategory';
 import DetailsFormInput from './DetailsFormInput';
 import AddMedia from './AddMedia';
 import ProductData from './ProductData';
+import AddFeaturedImage from './AddFeaturedImage';
+import AddTag from './AddTag';
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -54,7 +56,12 @@ export default function CreateProduct() {
         </div>
         <div className="w-1/3 py-4 px-6 flex flex-col">
           <CollapsibleSection title="Publish" children={<PublishProduct />} />
+          <CollapsibleSection
+            title="Featured image"
+            children={<AddFeaturedImage />}
+          />
           <CollapsibleSection title="Categories" children={<AddCategory />} />
+          <CollapsibleSection title="Tags" children={<AddTag />} />
         </div>
       </div>
     </div>
