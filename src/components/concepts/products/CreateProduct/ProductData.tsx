@@ -4,6 +4,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LinkIcon from '@mui/icons-material/Link';
 import EditAttributesIcon from '@mui/icons-material/EditAttributes';
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function ProductData() {
   const [tabSelected, setTabSelected] = useState(ITab.GENERAL);
@@ -120,6 +121,20 @@ function GeneralTab() {
         type="number"
         placeholder="0.00"
       />
+      <div className="flex items-center">
+        <input type="checkbox" className="h-4 w-4" onChange={() => {}} />
+        <span className="ml-2 text-gray-600 text-sm font-semibold">
+          Is downloadable?
+        </span>
+        <InfoIcon className="text-gray-600 p-1 cursor-pointer" />
+      </div>
+      <div className="flex items-center mt-2 border border-pink-600 p-1 rounded">
+        <InfoIcon className="text-pink-600 p-1" />
+        <span className="text-pink-600 text-xs font-semibold">
+          Downloadable products have all non-featured image media hidden behind
+          a paywall e.g. PDF, ePubs, MP3, etc.
+        </span>
+      </div>
     </>
   );
 }
