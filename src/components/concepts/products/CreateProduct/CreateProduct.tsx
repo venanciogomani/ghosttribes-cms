@@ -5,6 +5,7 @@ import PublishProduct from './PublishProduct';
 import AddCategory from './AddCategory';
 import DetailsFormInput from './DetailsFormInput';
 import AddMedia from './AddMedia';
+import ProductData from './ProductData';
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function CreateProduct() {
   const productType = type ? toSentenceCase(type) : 'Product';
 
   return (
-    <div className="relative flex flex-col h-full p-4">
+    <div className="relative flex flex-col p-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl text-bold text-slate-800">
           Create {productType}
@@ -39,6 +40,7 @@ export default function CreateProduct() {
           />
           <AddMedia />
           <DetailsFormInput label="Description" />
+          <ProductData />
           <DetailsFormInput label="Specification" />
         </div>
         <div className="w-1/3 py-4 px-6 flex flex-col">

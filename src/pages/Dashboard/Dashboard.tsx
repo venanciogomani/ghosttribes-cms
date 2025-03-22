@@ -13,7 +13,7 @@ export default function Dashboard() {
         className={`flex flex-col ${isSidebarOpen ? 'w-4/5' : 'w-[calc(100%_-_60px)]'}`}
       >
         <Header closeSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-        <div className=" h-full">
+        <div className=" h-full overflow-y-auto">
           <Outlet />
         </div>
       </div>
