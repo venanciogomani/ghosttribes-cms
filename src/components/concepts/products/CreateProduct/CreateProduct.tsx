@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import { toSentenceCase } from '../../../../utils/text-constants';
 import PublishProduct from './PublishProduct';
 import AddCategory from './AddCategory';
@@ -39,15 +42,51 @@ export default function CreateProduct() {
             onChange={() => {}}
           />
           <AddMedia />
-          <DetailsFormInput label="Description" />
-          <ProductData />
-          <DetailsFormInput label="Specification" />
+          <CollapsibleSection
+            title="Description"
+            children={<DetailsFormInput />}
+          />
+          <CollapsibleSection title="Product data" children={<ProductData />} />
+          <CollapsibleSection
+            title="Specification"
+            children={<DetailsFormInput />}
+          />
         </div>
         <div className="w-1/3 py-4 px-6 flex flex-col">
-          <PublishProduct />
-          <AddCategory />
+          <CollapsibleSection title="Publish" children={<PublishProduct />} />
+          <CollapsibleSection title="Categories" children={<AddCategory />} />
         </div>
       </div>
+    </div>
+  );
+}
+
+interface CollapsibleSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+function CollapsibleSection({ title, children }: CollapsibleSectionProps) {
+  const [isOpen, setIsOpen] = useState(true);
+  return (
+    <div className="w-full border-2 border-gray-200 mb-4">
+      <div
+        className="font-semibold text-gray-600 p-2 border-b-2 border-gray-200 
+              flex items-center justify-between"
+      >
+        <span>{title}</span>
+        {isOpen ? (
+          <ExpandMoreOutlinedIcon
+            className="cursor-pointer"
+            onClick={() => setIsOpen(false)}
+          />
+        ) : (
+          <ExpandLessOutlinedIcon
+            className="cursor-pointer"
+            onClick={() => setIsOpen(true)}
+          />
+        )}
+      </div>
+      {isOpen && children}
     </div>
   );
 }

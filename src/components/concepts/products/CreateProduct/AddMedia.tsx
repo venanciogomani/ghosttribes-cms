@@ -1,20 +1,20 @@
 import CloseIcon from '@mui/icons-material/Close';
 import PermMediaOutlinedIcon from '@mui/icons-material/PermMediaOutlined';
 import { trimToEllipsis } from '../../../../utils/text-constants';
+import GtButton, { GtButtonType } from '../../../shared/GtButton/GtButton';
 
 export default function AddMedia() {
   const hasMedia = false;
   return (
     <>
-      <div className="w-full mt-4 flex items-center">
-        <div
-          className="text-sm flex items-center px-2 py-2 border border-sky-800 bg-sky-800
-              text-white cursor-pointer rounded font-semibold
-              hover:border-sky-600 hover:bg-sky-600 transition duration-300 ease-in-out"
-        >
-          <PermMediaOutlinedIcon fontSize="small" />
-          <span className="ml-1">Add media</span>
-        </div>
+      <div className="w-full my-4 flex items-center">
+        <GtButton
+          label="Add media"
+          variant={GtButtonType.PRIMARY}
+          onClick={() => {}}
+          startIcon={<PermMediaOutlinedIcon fontSize="small" />}
+          fontSize="sm"
+        />
       </div>
       {hasMedia && (
         <div className="w-full flex items-center mt-2">
